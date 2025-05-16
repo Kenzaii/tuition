@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | EduSingapore</title>
+  <meta name="description" content="Log in to your EduSingapore account to access your dashboard, schedule sessions, and track your academic progress.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../images/favicon.ico">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="../index.html" class="logo">Edu<span>Singapore</span></a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="information.html">Information</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="booking.html">Book Now</a></li>
+          <li class="auth-link"><a href="login.html">Login / Register</a></li>
+          <li class="profile-link" style="display: none;"><a href="dashboard.html">My Account</a></li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Section -->
+  <section class="section login-wrapper">
+    <div class="container">
+      <div class="auth-container" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; max-width: 1000px; margin: 0 auto;">
+        <!-- Login Form -->
+        <div class="login-container" style="flex: 1; min-width: 300px; max-width: 450px; background-color: #fff; padding: 2rem; border-radius: 5px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+          <div class="login-title">
+            <h2>Log In</h2>
+            <p>Access your EduSingapore account</p>
+          </div>
+          
+          <div class="login-error alert alert-danger" style="display: none; background-color: var(--error-color); color: white; padding: 0.75rem; border-radius: 5px; margin-bottom: 1rem;">
+            Invalid email or password. Please try again.
+          </div>
+          
+          <form class="login-form">
+            <div class="form-group">
+              <label for="login-email">Email Address</label>
+              <input type="email" class="form-control" id="login-email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" class="form-control" id="login-password" name="password" required>
+            </div>
+            
+            <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+              <label style="display: flex; align-items: center;">
+                <input type="checkbox" name="remember" style="margin-right: 0.5rem;">
+                Remember me
+              </label>
+              <a href="#" style="color: var(--primary-color); font-size: 0.9rem;">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Log In</button>
+          </form>
+          
+          <div style="text-align: center; margin-top: 2rem;">
+            <p style="margin-bottom: 1rem;">Or log in with:</p>
+            <div style="display: flex; justify-content: center; gap: 1rem;">
+              <a href="#" style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 5px; color: #333;">
+                <i class="fab fa-google" style="margin-right: 0.5rem;"></i> Google
+              </a>
+              <a href="#" style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 5px; color: #333;">
+                <i class="fab fa-facebook-f" style="margin-right: 0.5rem;"></i> Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Register Form -->
+        <div class="register-container" style="flex: 1; min-width: 300px; max-width: 450px; background-color: #fff; padding: 2rem; border-radius: 5px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+          <div class="register-title">
+            <h2>Register</h2>
+            <p>Create a new account</p>
+          </div>
+          
+          <form class="register-form">
+            <div class="form-group">
+              <label for="register-name">Full Name</label>
+              <input type="text" class="form-control" id="register-name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="register-email">Email Address</label>
+              <input type="email" class="form-control" id="register-email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="register-phone">Phone Number</label>
+              <input type="tel" class="form-control" id="register-phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <input type="password" class="form-control" id="register-password" name="password" required>
+              <small style="display: block; margin-top: 0.5rem; color: #666;">Password must be at least 8 characters long and include a number and a special character.</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="register-confirm-password">Confirm Password</label>
+              <input type="password" class="form-control" id="register-confirm-password" name="confirm_password" required>
+            </div>
+            
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="terms" required>
+                I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a>
+              </label>
+            </div>
+            
+            <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 1rem;">Register</button>
+          </form>
+          
+          <div style="text-align: center; margin-top: 2rem;">
+            <p>Already have an account? <a href="#" class="show-login" style="color: var(--primary-color); font-weight: 500;">Log in here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>EduSingapore</h3>
+          <p>Specialized tuition services for international students in Singapore. We help students adapt, excel, and thrive in Singapore's education system.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="information.html">Information</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="booking.html">Book Now</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Education St, Singapore 123456</p>
+          <p><i class="fas fa-phone"></i> +65 1234 5678</p>
+          <p><i class="fas fa-envelope"></i> info@edusingapore.com</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2023 EduSingapore. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+  
+  <!-- Login/Register Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Login form submission
+      const loginForm = document.querySelector('.login-form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const email = document.getElementById('login-email').value;
+          const password = document.getElementById('login-password').value;
+          
+          // Simple validation
+          if (!email || !password) {
+            document.querySelector('.login-error').style.display = 'block';
+            return;
+          }
+          
+          // In a real implementation, you would send this data to your server
+          // For demo purposes, we'll simulate a successful login
+          
+          // Show loading state
+          const submitBtn = loginForm.querySelector('button[type="submit"]');
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Logging in...';
+          
+          setTimeout(function() {
+            // Store login state in localStorage
+            localStorage.setItem('tutionWebsiteLoggedIn', 'true');
+            localStorage.setItem('tutionWebsiteUser', email);
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
+          }, 1500);
+        });
+      }
+      
+      // Register form submission
+      const registerForm = document.querySelector('.register-form');
+      if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('register-name').value;
+          const email = document.getElementById('register-email').value;
+          const phone = document.getElementById('register-phone').value;
+          const password = document.getElementById('register-password').value;
+          const confirmPassword = document.getElementById('register-confirm-password').value;
+          
+          // Simple validation
+          if (!name || !email || !phone || !password || !confirmPassword) {
+            alert('Please fill in all fields');
+            return;
+          }
+          
+          if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+          }
+          
+          // In a real implementation, you would send this data to your server
+          // For demo purposes, we'll simulate a successful registration
+          
+          // Show loading state
+          const submitBtn = registerForm.querySelector('button[type="submit"]');
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Registering...';
+          
+          setTimeout(function() {
+            // Store login state in localStorage
+            localStorage.setItem('tutionWebsiteLoggedIn', 'true');
+            localStorage.setItem('tutionWebsiteUser', email);
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
+          }, 1500);
+        });
+      }
+      
+      // Toggle between login and register forms for mobile view
+      const showLoginLink = document.querySelector('.show-login');
+      if (showLoginLink) {
+        showLoginLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector('.login-container').style.display = 'block';
+          document.querySelector('.register-container').style.display = 'none';
+        });
+      }
+      
+      const showRegisterLink = document.querySelector('.show-register');
+      if (showRegisterLink) {
+        showRegisterLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector('.register-container').style.display = 'block';
+          document.querySelector('.login-container').style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Session | EduSingapore</title>
+  <meta name="description" content="Book a tuition session with EduSingapore. Choose your preferred subject, tutor, date, and time for personalized academic support.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../images/favicon.ico">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="../index.html" class="logo">Edu<span>Singapore</span></a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="information.html">Information</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="booking.html">Book Now</a></li>
+          <li class="auth-link"><a href="login.html">Login / Register</a></li>
+          <li class="profile-link" style="display: none;"><a href="dashboard.html">My Account</a></li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/booking-banner.jpg'); background-size: cover; background-position: center; padding: 5rem 0; text-align: center; color: #fff;">
+    <div class="container">
+      <h1>Book a Session</h1>
+      <p>Schedule your personalized tuition session in just a few steps</p>
+    </div>
+  </section>
+
+  <!-- Booking Steps Section -->
+  <section class="section">
+    <div class="container">
+      <div class="booking-steps">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-title">Service</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-title">Schedule</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-title">Details</div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-title">Payment</div>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-title">Confirmation</div>
+        </div>
+      </div>
+      
+      <div class="booking-form-container">
+        <form class="booking-form">
+          <!-- Step 1: Service Selection -->
+          <div class="form-step" id="step1">
+            <h2>Select Your Service</h2>
+            <p>Choose the type of tuition service you're looking for</p>
+            
+            <div class="form-group">
+              <label for="service-type">Service Type *</label>
+              <select class="form-control" id="service-type" name="service_type" required>
+                <option value="" selected disabled>Select a service</option>
+                <option value="one-on-one">1-on-1 Private Tutoring</option>
+                <option value="small-group">Small Group Tuition</option>
+                <option value="intensive">Intensive Program</option>
+                <option value="assessment">Free Assessment Session</option>
+                <option value="consultation">Parent-Teacher Consultation</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select class="form-control" id="subject" name="subject" required>
+                <option value="" selected disabled>Select a subject</option>
+                <optgroup label="Primary Level">
+                  <option value="primary-english">English</option>
+                  <option value="primary-math">Mathematics</option>
+                  <option value="primary-science">Science</option>
+                  <option value="primary-chinese">Chinese</option>
+                </optgroup>
+                <optgroup label="Secondary Level">
+                  <option value="secondary-english">English</option>
+                  <option value="secondary-emath">E-Mathematics</option>
+                  <option value="secondary-amath">A-Mathematics</option>
+                  <option value="secondary-physics">Physics</option>
+                  <option value="secondary-chemistry">Chemistry</option>
+                  <option value="secondary-biology">Biology</option>
+                </optgroup>
+                <optgroup label="JC Level">
+                  <option value="jc-gp">General Paper</option>
+                  <option value="jc-math">H2 Mathematics</option>
+                  <option value="jc-physics">H2 Physics</option>
+                  <option value="jc-chemistry">H2 Chemistry</option>
+                  <option value="jc-biology">H2 Biology</option>
+                  <option value="jc-econs">H2 Economics</option>
+                </optgroup>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="level">Academic Level *</label>
+              <select class="form-control" id="level" name="level" required>
+                <option value="" selected disabled>Select a level</option>
+                <optgroup label="Primary">
+                  <option value="p1">Primary 1</option>
+                  <option value="p2">Primary 2</option>
+                  <option value="p3">Primary 3</option>
+                  <option value="p4">Primary 4</option>
+                  <option value="p5">Primary 5</option>
+                  <option value="p6">Primary 6</option>
+                </optgroup>
+                <optgroup label="Secondary">
+                  <option value="s1">Secondary 1</option>
+                  <option value="s2">Secondary 2</option>
+                  <option value="s3">Secondary 3</option>
+                  <option value="s4">Secondary 4</option>
+                  <option value="s5">Secondary 5</option>
+                </optgroup>
+                <optgroup label="Junior College">
+                  <option value="jc1">JC 1</option>
+                  <option value="jc2">JC 2</option>
+                </optgroup>
+                <optgroup label="International">
+                  <option value="ib-myp">IB MYP</option>
+                  <option value="ib-dp">IB Diploma</option>
+                  <option value="igcse">IGCSE</option>
+                  <option value="ap">AP Courses</option>
+                </optgroup>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Session Mode *</label>
+              <div style="display: flex; gap: 20px;">
+                <label style="display: flex; align-items: center;">
+                  <input type="radio" name="mode" value="in-person" required>
+                  <span style="margin-left: 10px;">In-Person</span>
+                </label>
+                <label style="display: flex; align-items: center;">
+                  <input type="radio" name="mode" value="online" required>
+                  <span style="margin-left: 10px;">Online</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="form-actions" style="margin-top: 2rem; text-align: right;">
+              <button type="button" class="btn btn-next">Next: Schedule <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          
+          <!-- Step 2: Schedule Selection -->
+          <div class="form-step" id="step2" style="display: none;">
+            <h2>Select Your Schedule</h2>
+            <p>Choose your preferred date and time</p>
+            
+            <div class="form-group">
+              <label for="session-date">Preferred Date *</label>
+              <input type="date" class="form-control" id="session-date" name="date" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="session-time">Preferred Time *</label>
+              <select class="form-control" id="session-time" name="time" required>
+                <option value="" selected disabled>Select a time slot</option>
+                <option value="09:00">09:00 AM - 10:30 AM</option>
+                <option value="10:30">10:30 AM - 12:00 PM</option>
+                <option value="13:00">01:00 PM - 02:30 PM</option>
+                <option value="14:30">02:30 PM - 04:00 PM</option>
+                <option value="16:00">04:00 PM - 05:30 PM</option>
+                <option value="17:30">05:30 PM - 07:00 PM</option>
+                <option value="19:00">07:00 PM - 08:30 PM</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="duration">Session Duration *</label>
+              <select class="form-control" id="duration" name="duration" required>
+                <option value="1.5" selected>1.5 hours (Standard)</option>
+                <option value="2">2 hours</option>
+                <option value="2.5">2.5 hours</option>
+                <option value="3">3 hours</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="frequency">Session Frequency</label>
+              <select class="form-control" id="frequency" name="frequency">
+                <option value="once" selected>One-time Session</option>
+                <option value="weekly">Weekly</option>
+                <option value="twice-weekly">Twice Weekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+            
+            <div class="calendar-container" style="margin-top: 2rem;">
+              <div class="calendar-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <button type="button" class="prev-month" style="background: none; border: none; cursor: pointer;"><i class="fas fa-chevron-left"></i></button>
+                <h3>May 2023</h3>
+                <button type="button" class="next-month" style="background: none; border: none; cursor: pointer;"><i class="fas fa-chevron-right"></i></button>
+              </div>
+              
+              <div class="calendar-weekdays" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 0.5rem;">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+              </div>
+              
+              <div class="calendar-days" style="display: grid; grid-template-columns: repeat(7, 1fr); grid-gap: 5px;">
+                <!-- Calendar days will be generated by JavaScript -->
+              </div>
+            </div>
+            
+            <div class="form-actions" style="margin-top: 2rem; display: flex; justify-content: space-between;">
+              <button type="button" class="btn btn-prev"><i class="fas fa-arrow-left"></i> Back</button>
+              <button type="button" class="btn btn-next">Next: Your Details <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          
+          <!-- Step 3: Personal Details -->
+          <div class="form-step" id="step3" style="display: none;">
+            <h2>Your Details</h2>
+            <p>Please provide your personal information</p>
+            
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="student-name">Student Name (if different from above)</label>
+              <input type="text" class="form-control" id="student-name" name="student_name">
+            </div>
+            
+            <div class="form-group">
+              <label for="school">Current School</label>
+              <input type="text" class="form-control" id="school" name="school">
+            </div>
+            
+            <div class="form-group">
+              <label for="notes">Special Requests or Notes</label>
+              <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="hear-about">How did you hear about us?</label>
+              <select class="form-control" id="hear-about" name="referral_source">
+                <option value="" selected>Please select (optional)</option>
+                <option value="google">Google Search</option>
+                <option value="facebook">Facebook</option>
+                <option value="instagram">Instagram</option>
+                <option value="friend">Friend Referral</option>
+                <option value="school">School Recommendation</option>
+                <option value="flyer">Flyer/Advertisement</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-actions" style="margin-top: 2rem; display: flex; justify-content: space-between;">
+              <button type="button" class="btn btn-prev"><i class="fas fa-arrow-left"></i> Back</button>
+              <button type="button" class="btn btn-next">Next: Payment <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          
+          <!-- Step 4: Payment -->
+          <div class="form-step" id="step4" style="display: none;">
+            <h2>Payment Information</h2>
+            <p>Select your preferred payment method</p>
+            
+            <div class="booking-summary" style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 5px; margin-bottom: 2rem;">
+              <h3 style="margin-top: 0;">Booking Summary</h3>
+              
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Service:</span>
+                <span class="summary-service">1-on-1 Private Tutoring (Mathematics)</span>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Date & Time:</span>
+                <span class="summary-datetime">May 15, 2023 - 4:00 PM</span>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Duration:</span>
+                <span class="summary-duration">1.5 hours</span>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Mode:</span>
+                <span class="summary-mode">In-Person</span>
+              </div>
+              
+              <hr style="margin: 1rem 0;">
+              
+              <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                <span>Total:</span>
+                <span class="summary-total">$120.00</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Payment Method *</label>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+                <label style="border: 1px solid #ddd; padding: 1rem; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                  <input type="radio" name="payment_method" value="credit-card" required style="margin-right: 10px;">
+                  <span>Credit Card</span>
+                </label>
+                <label style="border: 1px solid #ddd; padding: 1rem; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                  <input type="radio" name="payment_method" value="paypal" required style="margin-right: 10px;">
+                  <span>PayPal</span>
+                </label>
+                <label style="border: 1px solid #ddd; padding: 1rem; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                  <input type="radio" name="payment_method" value="bank-transfer" required style="margin-right: 10px;">
+                  <span>Bank Transfer</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Credit Card Details (shown conditionally based on selection) -->
+            <div id="credit-card-details" style="margin-top: 1.5rem; display: none;">
+              <div class="form-group">
+                <label for="card-number">Card Number *</label>
+                <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456">
+              </div>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                  <label for="expiry-date">Expiry Date *</label>
+                  <input type="text" class="form-control" id="expiry-date" placeholder="MM/YY">
+                </div>
+                
+                <div class="form-group">
+                  <label for="cvv">CVV *</label>
+                  <input type="text" class="form-control" id="cvv" placeholder="123">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="card-name">Name on Card *</label>
+                <input type="text" class="form-control" id="card-name">
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 1.5rem;">
+              <label>
+                <input type="checkbox" name="terms" required>
+                I agree to the <a href="#" style="text-decoration: underline;">terms and conditions</a> and <a href="#" style="text-decoration: underline;">cancellation policy</a>.
+              </label>
+            </div>
+            
+            <div class="form-actions" style="margin-top: 2rem; display: flex; justify-content: space-between;">
+              <button type="button" class="btn btn-prev"><i class="fas fa-arrow-left"></i> Back</button>
+              <button type="submit" class="btn btn-accent">Confirm Booking <i class="fas fa-check"></i></button>
+            </div>
+          </div>
+          
+          <!-- Step 5: Confirmation (displayed after form submission) -->
+          <div class="form-step" id="step5" style="display: none;">
+            <div style="text-align: center; padding: 2rem;">
+              <div style="font-size: 5rem; color: var(--success-color); margin-bottom: 1.5rem;">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              
+              <h2>Booking Confirmed!</h2>
+              <p style="margin-bottom: 1.5rem;">Thank you for booking a session with EduSingapore.</p>
+              
+              <div class="confirmation-details" style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 5px; margin: 2rem 0; text-align: left;">
+                <h3 style="margin-top: 0;">Booking Details</h3>
+                <p><strong>Booking Reference:</strong> <span id="booking-reference">ESG20230515001</span></p>
+                <p><strong>Service:</strong> <span id="confirmed-service">1-on-1 Private Tutoring (Mathematics)</span></p>
+                <p><strong>Date & Time:</strong> <span id="confirmed-datetime">May 15, 2023 - 4:00 PM</span></p>
+                <p><strong>Duration:</strong> <span id="confirmed-duration">1.5 hours</span></p>
+                <p><strong>Mode:</strong> <span id="confirmed-mode">In-Person</span></p>
+                <p><strong>Location:</strong> <span id="confirmed-location">123 Education St, Singapore 123456</span></p>
+              </div>
+              
+              <p>We've sent a confirmation email to <span id="confirmed-email">johndoe@example.com</span> with all the details including your Zoom link (for online sessions).</p>
+              
+              <div style="margin-top: 2rem;">
+                <a href="../index.html" class="btn">Return to Home</a>
+                <a href="dashboard.html" class="btn btn-accent" style="margin-left: 1rem;">Go to My Account</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section" style="background-color: #f5f5f5;">
+    <div class="container">
+      <div class="section-title">
+        <h2>Booking FAQs</h2>
+        <p>Common questions about our booking process</p>
+      </div>
+      
+      <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+        <div class="faq-item">
+          <div class="faq-question">What is your cancellation policy?</div>
+          <div class="faq-answer">
+            <p>You can reschedule or cancel your booking up to 24 hours before the scheduled session without any penalty. For cancellations made less than 24 hours in advance, a 50% fee will apply. No-shows will be charged the full session fee.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">How do online sessions work?</div>
+          <div class="faq-answer">
+            <p>Online sessions are conducted via Zoom. After your booking is confirmed, you'll receive an email with the Zoom link and instructions. You'll need a computer or tablet with a camera, microphone, and stable internet connection. Our tutors use interactive digital whiteboards and screen sharing to create an engaging learning experience.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Can I request a specific tutor?</div>
+          <div class="faq-answer">
+            <p>Yes, if you have a preference for a specific tutor, please mention this in the "Special Requests" section when booking. We'll do our best to accommodate your request based on the tutor's availability. If you don't have a preference, we'll match you with the most suitable tutor for your subject and level.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">What should I bring to the session?</div>
+          <div class="faq-answer">
+            <p>For in-person sessions, please bring your textbooks, notes, and any relevant learning materials. It's also helpful to bring recent assessments or areas you're struggling with. For online sessions, please have these materials accessible on your device or physically beside you. A notebook and pen/pencil are always recommended regardless of the mode.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>EduSingapore</h3>
+          <p>Specialized tuition services for international students in Singapore. We help students adapt, excel, and thrive in Singapore's education system.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="information.html">Information</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="booking.html">Book Now</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Education St, Singapore 123456</p>
+          <p><i class="fas fa-phone"></i> +65 1234 5678</p>
+          <p><i class="fas fa-envelope"></i> info@edusingapore.com</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2023 EduSingapore. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+  
+  <!-- Booking Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Booking form navigation
+      const steps = document.querySelectorAll('.form-step');
+      const stepIndicators = document.querySelectorAll('.booking-steps .step');
+      const nextButtons = document.querySelectorAll('.btn-next');
+      const prevButtons = document.querySelectorAll('.btn-prev');
+      const bookingForm = document.querySelector('.booking-form');
+      
+      let currentStep = 0;
+      
+      // Initialize steps
+      updateSteps();
+      
+      // Next button handlers
+      nextButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          if (validateStep(currentStep)) {
+            currentStep++;
+            updateSteps();
+            
+            // Update booking summary in Step 4
+            if (currentStep === 3) {
+              updateBookingSummary();
+            }
+          }
+        });
+      });
+      
+      // Previous button handlers
+      prevButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          currentStep--;
+          updateSteps();
+        });
+      });
+      
+      // Form submission handler
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // In a real implementation, you would process the form submission and payment
+          // For demo purposes, we'll just show the confirmation step
+          
+          // Update confirmation details
+          document.getElementById('confirmed-email').textContent = document.getElementById('email').value || 'your email';
+          
+          // Move to confirmation step
+          currentStep = 4;
+          updateSteps();
+        });
+      }
+      
+      // Payment method selection
+      const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
+      const creditCardDetails = document.getElementById('credit-card-details');
+      
+      paymentMethods.forEach(method => {
+        method.addEventListener('change', function() {
+          if (this.value === 'credit-card') {
+            creditCardDetails.style.display = 'block';
+          } else {
+            creditCardDetails.style.display = 'none';
+          }
+        });
+      });
+      
+      // Helper functions
+      function updateSteps() {
+        steps.forEach((step, index) => {
+          step.style.display = index === currentStep ? 'block' : 'none';
+        });
+        
+        stepIndicators.forEach((step, index) => {
+          if (index <= currentStep) {
+            step.classList.add('active');
+          } else {
+            step.classList.remove('active');
+          }
+        });
+        
+        // Scroll to top of form
+        window.scrollTo({
+          top: document.querySelector('.booking-steps').offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
+      
+      function validateStep(step) {
+        const currentStepElement = steps[step];
+        const requiredFields = currentStepElement.querySelectorAll('input[required], select[required], textarea[required]');
+        let valid = true;
+        
+        requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+            valid = false;
+            field.classList.add('is-invalid');
+            
+            // Show error message
+            let errorElement = field.nextElementSibling;
+            if (!errorElement || !errorElement.classList.contains('error-message')) {
+              errorElement = document.createElement('div');
+              errorElement.classList.add('error-message');
+              errorElement.style.color = 'var(--error-color)';
+              errorElement.style.fontSize = '0.85rem';
+              errorElement.style.marginTop = '0.25rem';
+              field.parentNode.insertBefore(errorElement, field.nextSibling);
+            }
+            errorElement.textContent = 'This field is required';
+          } else {
+            field.classList.remove('is-invalid');
+            
+            // Remove error message
+            const errorElement = field.nextElementSibling;
+            if (errorElement && errorElement.classList.contains('error-message')) {
+              errorElement.remove();
+            }
+          }
+        });
+        
+        return valid;
+      }
+      
+      function updateBookingSummary() {
+        // Get form values
+        const serviceType = document.getElementById('service-type').options[document.getElementById('service-type').selectedIndex].text;
+        const subject = document.getElementById('subject').options[document.getElementById('subject').selectedIndex].text;
+        const date = document.getElementById('session-date').value;
+        const time = document.getElementById('session-time').options[document.getElementById('session-time').selectedIndex].text;
+        const duration = document.getElementById('duration').value;
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        
+        // Format date
+        const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+        
+        // Update summary elements
+        document.querySelector('.summary-service').textContent = `${serviceType} (${subject})`;
+        document.querySelector('.summary-datetime').textContent = `${formattedDate} - ${time}`;
+        document.querySelector('.summary-duration').textContent = `${duration} hours`;
+        document.querySelector('.summary-mode').textContent = mode === 'in-person' ? 'In-Person' : 'Online';
+        
+        // Calculate price based on service type and duration
+        let baseRate = 0;
+        switch (document.getElementById('service-type').value) {
+          case 'one-on-one':
+            baseRate = 80;
+            break;
+          case 'small-group':
+            baseRate = 45;
+            break;
+          case 'intensive':
+            baseRate = 100;
+            break;
+          case 'assessment':
+            baseRate = 0;
+            break;
+          case 'consultation':
+            baseRate = 60;
+            break;
+          default:
+            baseRate = 80;
+        }
+        
+        const totalPrice = baseRate * parseFloat(duration);
+        document.querySelector('.summary-total').textContent = `$${totalPrice.toFixed(2)}`;
+      }
+    });
+  </script>
+</body>
+</html> 
