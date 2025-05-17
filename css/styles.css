@@ -869,6 +869,12 @@ img {
   margin-left: auto;
 }
 
+.message-error {
+  background-color: var(--error-color);
+  color: #fff;
+  align-self: flex-start;
+}
+
 .chat-input {
   display: flex;
   padding: 1rem;
@@ -878,6 +884,48 @@ img {
 .chat-input input {
   flex-grow: 1;
   margin-right: 1rem;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
+
+.typing-indicator span {
+  height: 8px;
+  width: 8px;
+  float: left;
+  margin: 0 1px;
+  background-color: #9E9EA1;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.typing-indicator span:nth-of-type(1) {
+  animation: 1s blink infinite 0.3333s;
+}
+
+.typing-indicator span:nth-of-type(2) {
+  animation: 1s blink infinite 0.6666s;
+}
+
+.typing-indicator span:nth-of-type(3) {
+  animation: 1s blink infinite 0.9999s;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+
+/* API Key Modal Styles */
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
 }
 
 /* Animations */
