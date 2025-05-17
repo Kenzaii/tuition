@@ -7,14 +7,15 @@
 
 // Configuration for OpenAI API
 const OPENAI_CONFIG = {
-  // API endpoint for OpenAI chat completions
+  // API endpoint for OpenAI chat completions (updated for project API keys)
   endpoint: 'https://api.openai.com/v1/chat/completions',
+  // No specific API version - will use the default version
 
   // Default model to use
   model: 'gpt-3.5-turbo',
 
   // Predefined API key - REPLACE THIS WITH YOUR ACTUAL API KEY
-  apiKey: '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',
+  apiKey: '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',
 
   // Default system message to set the context for the AI
   systemMessage: `You are EduBot, an AI assistant for EduSingapore, a tuition service provider for international students in Singapore.
@@ -28,7 +29,16 @@ const OPENAI_CONFIG = {
   Your role is to be helpful, friendly, and informative. Provide concise answers about our services, pricing, scheduling, and educational approach. If you don't know specific details like exact pricing, suggest that the user contact us directly for the most accurate information.`,
 
   // Maximum number of messages to keep in context
-  maxMessages: 10
+  maxMessages: 10,
+
+  // Google Sheets logging configuration
+  logging: {
+    enabled: true,
+    // Replace with your Google Apps Script Web App URL (we'll create this in the next step)
+    googleScriptUrl: 'https://script.google.com/macros/s/AKfycbwt3OBG36o71sdylSruF9FYwxHxvW-wUrz8FGjFrYmkogo0AbgVWD5RXVxG8gC9ssQXtQ/exec',
+    // Optional user identifier (can be updated dynamically)
+    userIdentifier: 'anonymous'
+  }
 };
 
 // Class to handle OpenAI chat functionality
@@ -40,6 +50,18 @@ class OpenAIChat {
       { role: 'system', content: this.config.systemMessage }
     ];
     this.isWaitingForResponse = false;
+    this.sessionId = this.generateSessionId();
+    this.conversationStartTime = new Date().toISOString();
+  }
+
+  /**
+   * Generate a unique session ID for this chat session
+   * @returns {string} A unique session ID
+   */
+  generateSessionId() {
+    return 'session_' + Math.random().toString(36).substring(2, 15) +
+           Math.random().toString(36).substring(2, 15) +
+           '_' + new Date().getTime();
   }
 
   /**
@@ -47,7 +69,15 @@ class OpenAIChat {
    * @param {string} key - OpenAI API key
    */
   setApiKey(key) {
-    this.apiKey = key;
+    // Validate the API key format
+    if (key && (key.startsWith('sk-') || key.startsWith('sk-proj-'))) {
+      this.apiKey = key;
+      console.log(`API key set successfully (${key.startsWith('sk-proj-') ? 'project' : 'traditional'} format)`);
+      return true;
+    } else {
+      console.error('Invalid API key format. Must start with "sk-" or "sk-proj-"');
+      return false;
+    }
   }
 
   /**
@@ -66,11 +96,75 @@ class OpenAIChat {
   }
 
   /**
+   * Check if the API key is valid
+   * @returns {boolean} True if the API key is valid
+   */
+  hasValidApiKey() {
+    const key = this.getApiKey();
+    return key && (key.startsWith('sk-') || key.startsWith('sk-proj-'));
+  }
+
+  /**
+   * Set a user identifier for logging purposes
+   * @param {string} identifier - User identifier (email, name, etc.)
+   */
+  setUserIdentifier(identifier) {
+    if (this.config.logging) {
+      this.config.logging.userIdentifier = identifier;
+    }
+  }
+
+  /**
+   * Log a chat message to Google Sheets
+   * @param {string} role - The role of the message sender ('user' or 'assistant')
+   * @param {string} content - The message content
+   * @returns {Promise<void>}
+   */
+  async logChatMessage(role, content) {
+    if (!this.config.logging || !this.config.logging.enabled || !this.config.logging.googleScriptUrl) {
+      return;
+    }
+
+    try {
+      const timestamp = new Date().toISOString();
+      const data = {
+        timestamp: timestamp,
+        sessionId: this.sessionId,
+        conversationStartTime: this.conversationStartTime,
+        userIdentifier: this.config.logging.userIdentifier || 'anonymous',
+        role: role,
+        message: content,
+        // Collect some basic, non-identifying information for analytics
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        referrer: document.referrer || 'direct',
+        // You can add more fields as needed
+      };
+
+      // Send the data to Google Sheets via the Apps Script Web App
+      await fetch(this.config.logging.googleScriptUrl, {
+        method: 'POST',
+        mode: 'no-cors', // This is important for CORS issues
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      console.log('Chat message logged to Google Sheets');
+    } catch (error) {
+      // Don't let logging errors affect the chat functionality
+      console.error('Error logging chat message:', error);
+    }
+  }
+
+  /**
    * Add a message to the conversation history
    * @param {string} role - The role of the message sender ('user' or 'assistant')
    * @param {string} content - The message content
    */
-  addMessage(role, content) {
+  async addMessage(role, content) {
     this.messages.push({ role, content });
 
     // Keep only the last N messages to avoid token limits
@@ -82,6 +176,11 @@ class OpenAIChat {
         ...this.messages.slice(-(this.config.maxMessages))
       ];
     }
+
+    // Log the message to Google Sheets if logging is enabled
+    if (role !== 'system') { // Don't log system messages
+      await this.logChatMessage(role, content);
+    }
   }
 
   /**
@@ -91,8 +190,8 @@ class OpenAIChat {
    */
   async sendMessage(message) {
     const apiKey = this.getApiKey();
-    if (!apiKey) {
-      throw new Error('API key not available. Please check your configuration.');
+    if (!this.hasValidApiKey()) {
+      throw new Error('Valid API key not available. Please enter a valid OpenAI API key (starts with sk- or sk-proj-).');
     }
 
     if (this.isWaitingForResponse) {
@@ -101,16 +200,30 @@ class OpenAIChat {
 
     this.isWaitingForResponse = true;
 
-    // Add user message to history
-    this.addMessage('user', message);
-
     try {
+      // Add user message to history and log it
+      await this.addMessage('user', message);
+
+      // Prepare headers based on API key format
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+
+      // Add the appropriate authorization header based on API key format
+      if (apiKey.startsWith('sk-proj-')) {
+        // Project API key format (newer OpenAI platform)
+        headers['Authorization'] = `Bearer ${apiKey}`;
+        // No OpenAI-Beta or OpenAI-Version headers to avoid compatibility issues
+      } else {
+        // Traditional API key format
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+
+      console.log('Using headers:', JSON.stringify(headers, null, 2));
+
       const response = await fetch(this.config.endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
+        headers: headers,
         body: JSON.stringify({
           model: this.config.model,
           messages: this.messages,
@@ -120,15 +233,33 @@ class OpenAIChat {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'Error communicating with OpenAI API');
+        let errorMessage = 'Error communicating with OpenAI API';
+        try {
+          const errorData = await response.json();
+          if (errorData.error && errorData.error.message) {
+            errorMessage = errorData.error.message;
+            console.error('OpenAI API error details:', errorData.error);
+          }
+        } catch (parseError) {
+          console.error('Error parsing error response:', parseError);
+          errorMessage = `API error (status ${response.status}): ${response.statusText}`;
+        }
+
+        // Log the full error for debugging
+        console.error('Full API error:', {
+          status: response.status,
+          statusText: response.statusText,
+          message: errorMessage
+        });
+
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
       const aiResponse = data.choices[0].message.content.trim();
 
-      // Add AI response to history
-      this.addMessage('assistant', aiResponse);
+      // Add AI response to history and log it
+      await this.addMessage('assistant', aiResponse);
 
       return aiResponse;
     } catch (error) {
@@ -211,8 +342,26 @@ function initOpenAIChatbot() {
         chatMessages.removeChild(typingIndicator);
       }
 
+      // Create a user-friendly error message
+      let userFriendlyMessage = "I'm sorry, I encountered an error while processing your request.";
+
+      // For technical users, include the actual error but simplified
+      if (error.message) {
+        // Check for common API errors and provide more helpful messages
+        if (error.message.includes('API key')) {
+          userFriendlyMessage = "I'm having trouble with my connection to OpenAI. The administrator should check the API key configuration.";
+        } else if (error.message.includes('Rate limit')) {
+          userFriendlyMessage = "I've reached my usage limit. Please try again in a few minutes.";
+        } else if (error.message.includes('maximum context length')) {
+          userFriendlyMessage = "Our conversation has become too long. Please click 'Reset Chat' to start a new conversation.";
+        } else {
+          // For other errors, provide a generic message with the option to see details
+          userFriendlyMessage += " Please try again or contact support if the problem persists.";
+        }
+      }
+
       // Show error message
-      addMessageToUI(`Error: ${error.message}. Please try again or contact support.`, 'error');
+      addMessageToUI(userFriendlyMessage, 'error');
       console.error('OpenAI API error:', error);
     }
   });
@@ -248,6 +397,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Now initialize our OpenAI chatbot
       initOpenAIChatbot();
+
+      // Use the predefined API key from the configuration
+      if (openAIChat.hasValidApiKey()) {
+        console.log('Using predefined API key');
+        // Add a welcome message to indicate the chatbot is ready
+        const chatMessages = document.querySelector('.chat-messages');
+        if (chatMessages && chatMessages.childNodes.length === 1) {
+          const readyMessage = document.createElement('div');
+          readyMessage.className = 'message message-received';
+          readyMessage.textContent = 'I\'m ready to answer your questions about our tuition services!';
+          chatMessages.appendChild(readyMessage);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+      } else {
+        console.error('No valid API key found in configuration');
+      }
+
       console.log('OpenAI chatbot initialized');
     }, 100);
   }
