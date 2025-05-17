@@ -15,7 +15,7 @@ const OPENAI_CONFIG = {
   model: 'gpt-3.5-turbo',
 
   // Predefined API key - REPLACE THIS WITH YOUR ACTUAL API KEY
-  apiKey: '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',
+  apiKey: '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',
 
   // Default system message to set the context for the AI
   systemMessage: `You are EduBot, an AI assistant for EduSingapore, a tuition service provider for international students in Singapore.
