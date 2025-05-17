@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initChatbot();
   initBookingSystem();
   initCalendar();
-  
+
   // Check if the user is logged in
   checkAuthStatus();
 });
@@ -16,14 +16,31 @@ document.addEventListener('DOMContentLoaded', function() {
 function initNavbar() {
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
-  
-  if (hamburger) {
-    hamburger.addEventListener('click', function() {
+
+  if (hamburger && navMenu) {
+    // Make sure hamburger is visible on mobile
+    if (window.innerWidth <= 768) {
+      hamburger.style.display = 'block';
+    }
+
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
       navMenu.classList.toggle('active');
       hamburger.classList.toggle('active');
     });
+
+    // Add click event to nav links to close menu when clicked
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+          hamburger.classList.remove('active');
+        }
+      });
+    });
   }
-  
+
   // Hide menu when clicking outside
   document.addEventListener('click', function(event) {
     if (!event.target.closest('.nav-menu') && !event.target.closest('.hamburger') && navMenu && navMenu.classList.contains('active')) {
@@ -31,17 +48,28 @@ function initNavbar() {
       hamburger.classList.remove('active');
     }
   });
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      hamburger.style.display = 'none';
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    } else {
+      hamburger.style.display = 'block';
+    }
+  });
 }
 
 // FAQ accordion functionality
 function initFAQs() {
   const faqQuestions = document.querySelectorAll('.faq-question');
-  
+
   if (faqQuestions.length) {
     faqQuestions.forEach(question => {
       question.addEventListener('click', () => {
         question.classList.toggle('active');
-        
+
         // Close other FAQs
         faqQuestions.forEach(item => {
           if (item !== question && item.classList.contains('active')) {
@@ -58,17 +86,17 @@ function initChatbot() {
   const chatForm = document.querySelector('.chat-form');
   const chatInput = document.querySelector('.chat-input input');
   const chatMessages = document.querySelector('.chat-messages');
-  
+
   if (chatForm && chatInput && chatMessages) {
     chatForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       const message = chatInput.value.trim();
       if (message !== '') {
         // Add user message
         addMessage(message, 'sent');
         chatInput.value = '';
-        
+
         // Simulate AI response after a short delay
         setTimeout(() => {
           const aiResponse = generateAIResponse(message);
@@ -83,11 +111,11 @@ function initChatbot() {
 function addMessage(text, type) {
   const chatMessages = document.querySelector('.chat-messages');
   if (!chatMessages) return;
-  
+
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message', `message-${type}`);
   messageDiv.textContent = text;
-  
+
   chatMessages.appendChild(messageDiv);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
@@ -95,7 +123,7 @@ function addMessage(text, type) {
 // Simple AI response generator based on keywords
 function generateAIResponse(message) {
   message = message.toLowerCase();
-  
+
   if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
     return "Hello! How can I help you with your tuition needs today?";
   } else if (message.includes('cost') || message.includes('price') || message.includes('fee')) {
@@ -122,16 +150,16 @@ function initBookingSystem() {
   const prevButtons = document.querySelectorAll('.btn-prev');
   const formSteps = document.querySelectorAll('.form-step');
   const stepIndicators = document.querySelectorAll('.step');
-  
+
   if (bookingForm && nextButtons.length && formSteps.length) {
     let currentStep = 0;
-    
+
     // Update step visibility
     function updateSteps() {
       formSteps.forEach((step, index) => {
         step.style.display = index === currentStep ? 'block' : 'none';
       });
-      
+
       stepIndicators.forEach((step, index) => {
         if (index <= currentStep) {
           step.classList.add('active');
@@ -140,15 +168,15 @@ function initBookingSystem() {
         }
       });
     }
-    
+
     // Initialize
     updateSteps();
-    
+
     // Next button handlers
     nextButtons.forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
-        
+
         // Validate current step
         if (validateStep(currentStep)) {
           currentStep++;
@@ -159,12 +187,12 @@ function initBookingSystem() {
         }
       });
     });
-    
+
     // Previous button handlers
     prevButtons.forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
-        
+
         currentStep--;
         if (currentStep < 0) {
           currentStep = 0;
@@ -172,20 +200,20 @@ function initBookingSystem() {
         updateSteps();
       });
     });
-    
+
     // Form submission
     bookingForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       if (validateStep(currentStep)) {
         // Collect form data
         const formData = new FormData(bookingForm);
         const bookingData = {};
-        
+
         for (const [key, value] of formData.entries()) {
           bookingData[key] = value;
         }
-        
+
         // You would normally send this data to your server
         // For demo purposes, we'll just simulate success
         showBookingConfirmation(bookingData);
@@ -198,10 +226,10 @@ function initBookingSystem() {
 function validateStep(step) {
   const formStep = document.querySelectorAll('.form-step')[step];
   if (!formStep) return true;
-  
+
   const requiredFields = formStep.querySelectorAll('[required]');
   let isValid = true;
-  
+
   requiredFields.forEach(field => {
     if (!field.value.trim()) {
       isValid = false;
@@ -210,7 +238,7 @@ function validateStep(step) {
       field.classList.remove('is-invalid');
     }
   });
-  
+
   return isValid;
 }
 
@@ -218,11 +246,11 @@ function validateStep(step) {
 function showBookingConfirmation(data) {
   const bookingContainer = document.querySelector('.booking-form-container');
   if (!bookingContainer) return;
-  
+
   // Create confirmation message
   const confirmationDiv = document.createElement('div');
   confirmationDiv.classList.add('booking-confirmation', 'card', 'fade-in');
-  
+
   const confirmationContent = `
     <div class="card-body text-center">
       <h2 class="card-title">Booking Confirmed!</h2>
@@ -234,13 +262,13 @@ function showBookingConfirmation(data) {
       </div>
     </div>
   `;
-  
+
   confirmationDiv.innerHTML = confirmationContent;
-  
+
   // Replace the form with confirmation
   bookingContainer.innerHTML = '';
   bookingContainer.appendChild(confirmationDiv);
-  
+
   // Send confirmation email (in a real app, this would be done server-side)
   console.log('Booking data:', data);
 }
@@ -249,22 +277,22 @@ function showBookingConfirmation(data) {
 function initCalendar() {
   const calendarContainer = document.querySelector('.calendar-container');
   if (!calendarContainer) return;
-  
+
   const date = new Date();
   const currentMonth = date.getMonth();
   const currentYear = date.getFullYear();
-  
+
   // Render calendar
   renderCalendar(currentMonth, currentYear, calendarContainer);
-  
+
   // Month navigation
   const prevMonthBtn = document.querySelector('.prev-month');
   const nextMonthBtn = document.querySelector('.next-month');
-  
+
   if (prevMonthBtn && nextMonthBtn) {
     let displayMonth = currentMonth;
     let displayYear = currentYear;
-    
+
     prevMonthBtn.addEventListener('click', () => {
       displayMonth--;
       if (displayMonth < 0) {
@@ -273,7 +301,7 @@ function initCalendar() {
       }
       renderCalendar(displayMonth, displayYear, calendarContainer);
     });
-    
+
     nextMonthBtn.addEventListener('click', () => {
       displayMonth++;
       if (displayMonth > 11) {
@@ -290,43 +318,43 @@ function renderCalendar(month, year, container) {
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
-  
+
   // Update header
   const calendarHeader = container.querySelector('.calendar-header h3');
   if (calendarHeader) {
     calendarHeader.textContent = `${monthNames[month]} ${year}`;
   }
-  
+
   // Generate days
   const calendarDays = container.querySelector('.calendar-days');
   if (calendarDays) {
     calendarDays.innerHTML = '';
-    
+
     // Add empty cells for days before the 1st
     for (let i = 0; i < firstDayOfMonth; i++) {
       const emptyDay = document.createElement('div');
       emptyDay.classList.add('calendar-day', 'empty');
       calendarDays.appendChild(emptyDay);
     }
-    
+
     // Add days of the month
     for (let i = 1; i <= daysInMonth; i++) {
       const dayEl = document.createElement('div');
       dayEl.classList.add('calendar-day');
       dayEl.textContent = i;
-      
+
       // Highlight today's date
       const today = new Date();
       if (today.getDate() === i && today.getMonth() === month && today.getFullYear() === year) {
         dayEl.classList.add('today');
       }
-      
+
       // Make days clickable for scheduling
       dayEl.addEventListener('click', () => {
         const selectedDays = calendarDays.querySelectorAll('.active');
         selectedDays.forEach(day => day.classList.remove('active'));
         dayEl.classList.add('active');
-        
+
         // Update any related date inputs
         const dateInput = document.querySelector('input[name="date"]');
         if (dateInput) {
@@ -334,7 +362,7 @@ function renderCalendar(month, year, container) {
           dateInput.value = formattedDate;
         }
       });
-      
+
       calendarDays.appendChild(dayEl);
     }
   }
@@ -344,11 +372,11 @@ function renderCalendar(month, year, container) {
 function checkAuthStatus() {
   // In a real app, this would check for a valid session or token
   const isLoggedIn = localStorage.getItem('tutionWebsiteLoggedIn') === 'true';
-  
+
   // Update UI based on auth status
   const authLinks = document.querySelectorAll('.auth-link');
   const profileLinks = document.querySelectorAll('.profile-link');
-  
+
   if (authLinks.length && profileLinks.length) {
     if (isLoggedIn) {
       authLinks.forEach(link => link.style.display = 'none');
@@ -363,31 +391,31 @@ function checkAuthStatus() {
 // Login functionality
 function handleLogin(e) {
   e.preventDefault();
-  
+
   const emailInput = document.querySelector('input[name="email"]');
   const passwordInput = document.querySelector('input[name="password"]');
-  
+
   if (!emailInput || !passwordInput) return;
-  
+
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
-  
+
   // Simple validation
   if (!email || !password) {
     showLoginError('Please enter both email and password');
     return;
   }
-  
+
   // In a real app, this would make an API call to validate credentials
   // For demo purposes, we'll simulate a successful login
-  
+
   // Simulate login process
   showLoginLoading(true);
-  
+
   setTimeout(() => {
     localStorage.setItem('tutionWebsiteLoggedIn', 'true');
     localStorage.setItem('tutionWebsiteUser', email);
-    
+
     // Redirect to dashboard or home page
     window.location.href = 'dashboard.html';
   }, 1500);
@@ -396,7 +424,7 @@ function handleLogin(e) {
 // Show login error
 function showLoginError(message) {
   const errorDiv = document.querySelector('.login-error');
-  
+
   if (errorDiv) {
     errorDiv.textContent = message;
     errorDiv.style.display = 'block';
@@ -415,7 +443,7 @@ function showLoginError(message) {
 function showLoginLoading(isLoading) {
   const submitBtn = document.querySelector('.login-form button[type="submit"]');
   if (!submitBtn) return;
-  
+
   if (isLoading) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Logging in...';
@@ -430,7 +458,7 @@ function handleLogout() {
   // Clear authentication data
   localStorage.removeItem('tutionWebsiteLoggedIn');
   localStorage.removeItem('tutionWebsiteUser');
-  
+
   // Redirect to home page
   window.location.href = 'index.html';
 }
@@ -438,14 +466,14 @@ function handleLogout() {
 // Add event listener for logout links
 document.addEventListener('DOMContentLoaded', function() {
   const logoutLinks = document.querySelectorAll('.logout-link');
-  
+
   logoutLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       handleLogout();
     });
   });
-  
+
   // Add event listener for login form
   const loginForm = document.querySelector('.login-form');
   if (loginForm) {
@@ -457,11 +485,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function initGroupChat() {
   const groupChatContainer = document.querySelector('.group-chat-container');
   if (!groupChatContainer) return;
-  
+
   const chatForm = groupChatContainer.querySelector('.chat-form');
   const chatInput = groupChatContainer.querySelector('.chat-input input');
   const chatMessages = groupChatContainer.querySelector('.chat-messages');
-  
+
   if (chatForm && chatInput && chatMessages) {
     // Example data - in a real app this would come from a database
     const sampleMessages = [
@@ -472,7 +500,7 @@ function initGroupChat() {
       { user: 'Sarah L.', message: 'Does anyone know a good place to get international phone plans?', time: '5 hours ago' },
       { user: 'Mike P.', message: 'I use Singtel, they have good plans for international students.', time: '3 hours ago' }
     ];
-    
+
     // Display sample messages
     sampleMessages.forEach(msg => {
       const messageHTML = `
@@ -484,22 +512,22 @@ function initGroupChat() {
           <div class="message-body">${msg.message}</div>
         </div>
       `;
-      
+
       chatMessages.innerHTML += messageHTML;
     });
-    
+
     // Scroll to bottom of chat
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    
+
     // Handle form submission
     chatForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       const message = chatInput.value.trim();
       if (message) {
         // Get user info from localStorage or use "You"
         const username = localStorage.getItem('tutionWebsiteUser') || 'You';
-        
+
         // Create message HTML
         const messageHTML = `
           <div class="group-chat-message user-message">
@@ -510,10 +538,10 @@ function initGroupChat() {
             <div class="message-body">${message}</div>
           </div>
         `;
-        
+
         chatMessages.innerHTML += messageHTML;
         chatInput.value = '';
-        
+
         // Scroll to bottom of chat
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
@@ -532,19 +560,19 @@ document.addEventListener('DOMContentLoaded', function() {
 function initNotes() {
   const notesContainer = document.querySelector('.notes-container');
   if (!notesContainer) return;
-  
+
   const notesList = notesContainer.querySelector('.notes-list');
   const noteForm = notesContainer.querySelector('.note-form');
   const noteInput = notesContainer.querySelector('.note-input');
-  
+
   if (notesList && noteForm && noteInput) {
     // Load saved notes
     loadNotes();
-    
+
     // Handle form submission
     noteForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       const noteText = noteInput.value.trim();
       if (noteText) {
         // Create new note
@@ -553,18 +581,18 @@ function initNotes() {
           text: noteText,
           date: new Date().toLocaleString()
         };
-        
+
         // Add to the list
         addNoteToList(note);
-        
+
         // Save to localStorage
         saveNote(note);
-        
+
         // Clear input
         noteInput.value = '';
       }
     });
-    
+
     // Delete note functionality
     notesList.addEventListener('click', function(e) {
       if (e.target.classList.contains('delete-note')) {
@@ -575,7 +603,7 @@ function initNotes() {
           if (noteElement) {
             noteElement.remove();
           }
-          
+
           // Remove from localStorage
           deleteNote(noteId);
         }
@@ -588,10 +616,10 @@ function initNotes() {
 function loadNotes() {
   const notesList = document.querySelector('.notes-list');
   if (!notesList) return;
-  
+
   // Get notes from localStorage
   const storedNotes = localStorage.getItem('tutionWebsiteNotes');
-  
+
   if (storedNotes) {
     const notes = JSON.parse(storedNotes);
     notes.forEach(note => {
@@ -604,11 +632,11 @@ function loadNotes() {
 function addNoteToList(note) {
   const notesList = document.querySelector('.notes-list');
   if (!notesList) return;
-  
+
   const noteElement = document.createElement('div');
   noteElement.id = `note-${note.id}`;
   noteElement.classList.add('note-item', 'card', 'mb-3', 'fade-in');
-  
+
   noteElement.innerHTML = `
     <div class="card-body">
       <p>${note.text}</p>
@@ -618,23 +646,23 @@ function addNoteToList(note) {
       </div>
     </div>
   `;
-  
+
   notesList.prepend(noteElement);
 }
 
 // Save note to localStorage
 function saveNote(note) {
   let notes = [];
-  
+
   // Get existing notes
   const storedNotes = localStorage.getItem('tutionWebsiteNotes');
   if (storedNotes) {
     notes = JSON.parse(storedNotes);
   }
-  
+
   // Add new note
   notes.push(note);
-  
+
   // Save back to localStorage
   localStorage.setItem('tutionWebsiteNotes', JSON.stringify(notes));
 }
@@ -644,12 +672,12 @@ function deleteNote(noteId) {
   // Get existing notes
   const storedNotes = localStorage.getItem('tutionWebsiteNotes');
   if (!storedNotes) return;
-  
+
   let notes = JSON.parse(storedNotes);
-  
+
   // Filter out the note to delete
   notes = notes.filter(note => note.id.toString() !== noteId.toString());
-  
+
   // Save back to localStorage
   localStorage.setItem('tutionWebsiteNotes', JSON.stringify(notes));
 }
@@ -665,7 +693,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function initProgressTracking() {
   const progressContainer = document.querySelector('.progress-container');
   if (!progressContainer) return;
-  
+
   // Example data - in a real app this would come from an API
   const progressData = {
     student: "Alex Smith",
@@ -681,25 +709,25 @@ function initProgressTracking() {
       { name: "English Essay", score: 88, date: "2023-04-28" }
     ]
   };
-  
+
   // Update student name
   const studentName = progressContainer.querySelector('.student-name');
   if (studentName) {
     studentName.textContent = progressData.student;
   }
-  
+
   // Update overall progress
   const overallProgress = progressContainer.querySelector('.overall-progress');
   if (overallProgress) {
     overallProgress.style.width = `${progressData.overall}%`;
     overallProgress.textContent = `${progressData.overall}%`;
   }
-  
+
   // Update subject progress
   const subjectsContainer = progressContainer.querySelector('.subjects-progress');
   if (subjectsContainer && progressData.subjects.length) {
     subjectsContainer.innerHTML = '';
-    
+
     progressData.subjects.forEach(subject => {
       const subjectHTML = `
         <div class="subject-item mb-3">
@@ -708,21 +736,21 @@ function initProgressTracking() {
             <span>${subject.score}% <small class="text-success">${subject.improvement}</small></span>
           </div>
           <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: ${subject.score}%" 
+            <div class="progress-bar" role="progressbar" style="width: ${subject.score}%"
                 aria-valuenow="${subject.score}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       `;
-      
+
       subjectsContainer.innerHTML += subjectHTML;
     });
   }
-  
+
   // Update recent tests
   const testsContainer = progressContainer.querySelector('.recent-tests');
   if (testsContainer && progressData.recent_tests.length) {
     testsContainer.innerHTML = '';
-    
+
     progressData.recent_tests.forEach(test => {
       const testHTML = `
         <tr>
@@ -731,7 +759,7 @@ function initProgressTracking() {
           <td>${test.date}</td>
         </tr>
       `;
-      
+
       testsContainer.innerHTML += testHTML;
     });
   }
@@ -742,4 +770,4 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.progress-container')) {
     initProgressTracking();
   }
-}); 
+});
