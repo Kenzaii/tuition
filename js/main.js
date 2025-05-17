@@ -83,13 +83,35 @@ function initFAQs() {
 
 // Simple AI chatbot functionality
 function initChatbot() {
+  console.log('Main.js initChatbot called');
+
+  // Check if OpenAI chatbot is available - if so, don't initialize the simple chatbot
+  if (window.OpenAIChat) {
+    console.log('OpenAI chatbot detected, skipping simple chatbot initialization');
+    return;
+  }
+
+  // Check if we're on the contact page with the OpenAI chatbot
+  const scriptTags = document.querySelectorAll('script');
+  for (const script of scriptTags) {
+    if (script.src && script.src.includes('openai-chat.js')) {
+      console.log('OpenAI script detected, skipping simple chatbot initialization');
+      return;
+    }
+  }
+
+  console.log('No OpenAI chatbot detected, initializing simple chatbot');
+
   const chatForm = document.querySelector('.chat-form');
   const chatInput = document.querySelector('.chat-input input');
   const chatMessages = document.querySelector('.chat-messages');
 
   if (chatForm && chatInput && chatMessages) {
+    console.log('Adding event listener to chat form (simple chatbot)');
+
     chatForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      console.log('Simple chatbot handling message');
 
       const message = chatInput.value.trim();
       if (message !== '') {
