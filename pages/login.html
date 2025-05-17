@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | EduSingapore</title>
   <meta name="description" content="Log in to your EduSingapore account to access your dashboard, schedule sessions, and track your academic progress.">
-  
+
   <!-- Favicon -->
   <link rel="icon" href="../images/favicon.ico">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../css/styles.css">
 </head>
@@ -35,7 +35,7 @@
           <li class="auth-link"><a href="login.html">Login / Register</a></li>
           <li class="profile-link" style="display: none;"><a href="dashboard.html">My Account</a></li>
         </ul>
-        <div class="hamburger">
+        <div class="hamburger" style="display: none;">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -47,99 +47,112 @@
   <!-- Login Section -->
   <section class="section login-wrapper">
     <div class="container">
-      <div class="auth-container" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; max-width: 1000px; margin: 0 auto;">
+      <div class="auth-container">
         <!-- Login Form -->
-        <div class="login-container" style="flex: 1; min-width: 300px; max-width: 450px; background-color: #fff; padding: 2rem; border-radius: 5px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+        <div class="login-container">
           <div class="login-title">
             <h2>Log In</h2>
             <p>Access your EduSingapore account</p>
           </div>
-          
+
           <div class="login-error alert alert-danger" style="display: none; background-color: var(--error-color); color: white; padding: 0.75rem; border-radius: 5px; margin-bottom: 1rem;">
             Invalid email or password. Please try again.
           </div>
-          
-          <form class="login-form">
+
+          <form class="login-form" aria-labelledby="login-heading">
             <div class="form-group">
               <label for="login-email">Email Address</label>
-              <input type="email" class="form-control" id="login-email" name="email" required>
+              <input type="email" class="form-control" id="login-email" name="email" required
+                     aria-required="true" autocomplete="email">
             </div>
-            
+
             <div class="form-group">
               <label for="login-password">Password</label>
-              <input type="password" class="form-control" id="login-password" name="password" required>
+              <input type="password" class="form-control" id="login-password" name="password" required
+                     aria-required="true" autocomplete="current-password">
             </div>
-            
+
             <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
-              <label style="display: flex; align-items: center;">
-                <input type="checkbox" name="remember" style="margin-right: 0.5rem;">
+              <label for="remember-me" style="display: flex; align-items: center;">
+                <input type="checkbox" id="remember-me" name="remember" style="margin-right: 0.5rem;">
                 Remember me
               </label>
-              <a href="#" style="color: var(--primary-color); font-size: 0.9rem;">Forgot password?</a>
+              <a href="#" class="forgot-password" aria-label="Forgot password">Forgot password?</a>
             </div>
-            
-            <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Log In</button>
+
+            <button type="submit" class="btn btn-full" aria-label="Log in to your account">Log In</button>
           </form>
-          
-          <div style="text-align: center; margin-top: 2rem;">
-            <p style="margin-bottom: 1rem;">Or log in with:</p>
-            <div style="display: flex; justify-content: center; gap: 1rem;">
-              <a href="#" style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 5px; color: #333;">
-                <i class="fab fa-google" style="margin-right: 0.5rem;"></i> Google
+
+          <div class="social-login">
+            <p>Or log in with:</p>
+            <div class="social-login-buttons">
+              <a href="#" class="social-login-btn">
+                <i class="fab fa-google"></i> Google
               </a>
-              <a href="#" style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 5px; color: #333;">
-                <i class="fab fa-facebook-f" style="margin-right: 0.5rem;"></i> Facebook
+              <a href="#" class="social-login-btn">
+                <i class="fab fa-facebook-f"></i> Facebook
               </a>
             </div>
           </div>
         </div>
-        
+
         <!-- Register Form -->
-        <div class="register-container" style="flex: 1; min-width: 300px; max-width: 450px; background-color: #fff; padding: 2rem; border-radius: 5px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+        <div class="register-container">
           <div class="register-title">
             <h2>Register</h2>
             <p>Create a new account</p>
           </div>
-          
-          <form class="register-form">
+
+          <form class="register-form" aria-labelledby="register-heading">
             <div class="form-group">
               <label for="register-name">Full Name</label>
-              <input type="text" class="form-control" id="register-name" name="name" required>
+              <input type="text" class="form-control" id="register-name" name="name" required
+                     aria-required="true" autocomplete="name">
             </div>
-            
+
             <div class="form-group">
               <label for="register-email">Email Address</label>
-              <input type="email" class="form-control" id="register-email" name="email" required>
+              <input type="email" class="form-control" id="register-email" name="email" required
+                     aria-required="true" autocomplete="email">
             </div>
-            
+
             <div class="form-group">
               <label for="register-phone">Phone Number</label>
-              <input type="tel" class="form-control" id="register-phone" name="phone" required>
+              <input type="tel" class="form-control" id="register-phone" name="phone" required
+                     aria-required="true" autocomplete="tel" pattern="[0-9\+\-\s()]{8,15}"
+                     title="Phone number must be 8-15 digits and can include +, -, spaces, and parentheses">
             </div>
-            
+
             <div class="form-group">
               <label for="register-password">Password</label>
-              <input type="password" class="form-control" id="register-password" name="password" required>
-              <small style="display: block; margin-top: 0.5rem; color: #666;">Password must be at least 8 characters long and include a number and a special character.</small>
+              <input type="password" class="form-control" id="register-password" name="password" required
+                     aria-required="true" autocomplete="new-password"
+                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}"
+                     aria-describedby="password-requirements">
+              <small id="password-requirements" class="password-hint">
+                Password must be at least 8 characters long and include a number, uppercase letter, lowercase letter, and special character.
+              </small>
             </div>
-            
+
             <div class="form-group">
               <label for="register-confirm-password">Confirm Password</label>
-              <input type="password" class="form-control" id="register-confirm-password" name="confirm_password" required>
+              <input type="password" class="form-control" id="register-confirm-password" name="confirm_password" required
+                     aria-required="true" autocomplete="new-password" aria-describedby="password-match-error">
+              <div class="password-error" id="password-match-error" role="alert" aria-live="assertive">Passwords do not match</div>
             </div>
-            
+
             <div class="form-group">
-              <label>
-                <input type="checkbox" name="terms" required>
-                I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a>
+              <label class="terms-label" for="terms-checkbox">
+                <input type="checkbox" id="terms-checkbox" name="terms" required aria-required="true">
+                <span>I agree to the <a href="#" class="open-terms">Terms of Service</a> and <a href="#" class="open-privacy">Privacy Policy</a></span>
               </label>
             </div>
-            
-            <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 1rem;">Register</button>
+
+            <button type="submit" class="btn btn-accent btn-full" aria-label="Create your account">Register</button>
           </form>
-          
-          <div style="text-align: center; margin-top: 2rem;">
-            <p>Already have an account? <a href="#" class="show-login" style="color: var(--primary-color); font-weight: 500;">Log in here</a></p>
+
+          <div class="login-link">
+            <p>Already have an account? <a href="#" class="show-login">Log in here</a></p>
           </div>
         </div>
       </div>
@@ -160,7 +173,7 @@
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
-        
+
         <div class="footer-section">
           <h3>Quick Links</h3>
           <ul>
@@ -171,7 +184,7 @@
             <li><a href="booking.html">Book Now</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Contact Us</h3>
           <p><i class="fas fa-map-marker-alt"></i> 123 Education St, Singapore 123456</p>
@@ -179,114 +192,905 @@
           <p><i class="fas fa-envelope"></i> info@edusingapore.com</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2023 EduSingapore. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
+  <!-- Policy Popups -->
+  <!-- Terms of Service Popup -->
+  <div id="terms-overlay" class="policy-overlay">
+    <div class="policy-content">
+      <span class="close-policy" id="close-terms">&times;</span>
+      <h1>Terms of Service</h1>
+
+      <div class="last-updated">
+        <p><strong>Last Updated:</strong> August 1, 2023</p>
+      </div>
+
+      <div class="terms-section">
+        <h2>1. Introduction</h2>
+        <p>Welcome to EduSingapore. These Terms of Service ("Terms") govern your use of our website, services, and products. By accessing or using EduSingapore's services, you agree to be bound by these Terms. If you disagree with any part of the terms, you may not access our services.</p>
+      </div>
+
+      <div class="terms-section">
+        <h2>2. Definitions</h2>
+        <p>Throughout these Terms, the following definitions apply:</p>
+        <ul>
+          <li><strong>"Service"</strong> refers to the educational services provided by EduSingapore, including but not limited to tuition, educational resources, and online learning materials.</li>
+          <li><strong>"User"</strong> refers to any individual who accesses or uses our services, including students, parents, and guardians.</li>
+          <li><strong>"Account"</strong> refers to the registered user profile created on our platform.</li>
+          <li><strong>"Content"</strong> refers to all materials, information, and resources available through our services.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2>3. Account Registration</h2>
+        <p>To access certain features of our service, you may be required to register for an account. You agree to provide accurate, current, and complete information during the registration process and to update such information to keep it accurate, current, and complete.</p>
+        <p>You are responsible for safeguarding the password that you use to access the service and for any activities or actions under your password. We encourage you to use "strong" passwords (passwords that use a combination of upper and lower case letters, numbers, and symbols) with your account.</p>
+      </div>
+
+      <div class="terms-section">
+        <h2>4. Service Usage</h2>
+        <p>Our services are designed to provide educational support to international students in Singapore. You agree to use our services only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+        <ul>
+          <li>Use the service in any way that violates any applicable local, national, or international law or regulation.</li>
+          <li>Impersonate or attempt to impersonate EduSingapore, an EduSingapore employee, another user, or any other person or entity.</li>
+          <li>Engage in any conduct that restricts or inhibits anyone's use or enjoyment of the service.</li>
+          <li>Use the service for any purpose that is unlawful or prohibited by these Terms.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2>5. Payments and Refunds</h2>
+        <p>Payment for our services must be made in advance according to our pricing structure. We accept various payment methods as indicated on our website.</p>
+        <p>Refund policies vary depending on the service purchased:</p>
+        <ul>
+          <li>For tuition sessions, cancellations made at least 24 hours in advance will receive a full refund or credit for a future session.</li>
+          <li>No refunds will be provided for missed sessions without prior notice.</li>
+          <li>For subscription services, refunds may be provided on a pro-rata basis for the unused portion of the subscription period.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2>6. Intellectual Property</h2>
+        <p>The content, features, and functionality of our service are owned by EduSingapore and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
+        <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our website without our prior written consent.</p>
+      </div>
+
+      <div class="terms-section">
+        <h2>7. Limitation of Liability</h2>
+        <p>In no event shall EduSingapore, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the service.</p>
+      </div>
+
+      <div class="terms-section">
+        <h2>8. Termination</h2>
+        <p>We may terminate or suspend your account and bar access to the service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+      </div>
+
+      <div class="terms-section">
+        <h2>9. Changes to Terms</h2>
+        <p>We reserve the right to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+      </div>
+
+      <div class="terms-section">
+        <h2>10. Contact Us</h2>
+        <p>If you have any questions about these Terms, please contact us at:</p>
+        <p>Email: info@edusingapore.com<br>
+        Phone: +65 1234 5678<br>
+        Address: 123 Education St, Singapore 123456</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Popup -->
+  <div id="privacy-overlay" class="policy-overlay">
+    <div class="policy-content">
+      <span class="close-policy" id="close-privacy">&times;</span>
+      <h1>Privacy Policy</h1>
+
+      <div class="last-updated">
+        <p><strong>Last Updated:</strong> August 1, 2023</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>1. Introduction</h2>
+        <p>At EduSingapore, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our services.</p>
+        <p>Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access our services.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>2. Information We Collect</h2>
+        <p>We collect several types of information from and about users of our services, including:</p>
+        <h3>2.1 Personal Information</h3>
+        <ul>
+          <li>Contact information (such as name, email address, phone number, and mailing address)</li>
+          <li>Account credentials (such as username and password)</li>
+          <li>Educational information (such as school, grade level, and academic records)</li>
+          <li>Payment information (such as credit card details and billing address)</li>
+          <li>Demographic information (such as age, gender, and nationality)</li>
+        </ul>
+
+        <h3>2.2 Non-Personal Information</h3>
+        <ul>
+          <li>Usage data (such as pages visited, time spent on pages, and links clicked)</li>
+          <li>Device information (such as IP address, browser type, and operating system)</li>
+          <li>Location data (such as general geographic location based on IP address)</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>3. How We Collect Information</h2>
+        <p>We collect information through various methods, including:</p>
+        <ul>
+          <li>Direct interactions (when you register for an account, book a session, or contact us)</li>
+          <li>Automated technologies (such as cookies, web beacons, and similar tracking technologies)</li>
+          <li>Third-party sources (such as educational institutions or payment processors)</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>4. How We Use Your Information</h2>
+        <p>We use the information we collect for various purposes, including:</p>
+        <ul>
+          <li>Providing and maintaining our services</li>
+          <li>Processing payments and managing accounts</li>
+          <li>Personalizing your experience</li>
+          <li>Communicating with you about our services</li>
+          <li>Analyzing usage patterns to improve our services</li>
+          <li>Complying with legal obligations</li>
+          <li>Protecting against fraudulent or unauthorized activity</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>5. Disclosure of Your Information</h2>
+        <p>We may disclose your personal information to the following categories of recipients:</p>
+        <ul>
+          <li>Service providers (such as payment processors, hosting providers, and analytics services)</li>
+          <li>Educational partners (such as tutors and educational institutions)</li>
+          <li>Legal authorities (when required by law or to protect our rights)</li>
+          <li>Business partners (in the event of a merger, acquisition, or sale of assets)</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>6. Data Security</h2>
+        <p>We implement appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>7. Data Retention</h2>
+        <p>We retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>8. Your Rights</h2>
+        <p>Depending on your location, you may have certain rights regarding your personal information, including:</p>
+        <ul>
+          <li>The right to access your personal information</li>
+          <li>The right to correct inaccurate or incomplete information</li>
+          <li>The right to delete your personal information</li>
+          <li>The right to restrict or object to processing</li>
+          <li>The right to data portability</li>
+          <li>The right to withdraw consent</li>
+        </ul>
+        <p>To exercise these rights, please contact us using the information provided in the "Contact Us" section.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>9. Children's Privacy</h2>
+        <p>Our services are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>10. Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>11. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+        <p>Email: privacy@edusingapore.com<br>
+        Phone: +65 1234 5678<br>
+        Address: 123 Education St, Singapore 123456</p>
+      </div>
+    </div>
+  </div>
+
   <!-- JavaScript -->
   <script src="../js/main.js"></script>
-  
+  <script src="../js/api-bridge.js"></script>
+
   <!-- Login/Register Script -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Login form submission
       const loginForm = document.querySelector('.login-form');
       if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', async function(e) {
           e.preventDefault();
-          
+
           const email = document.getElementById('login-email').value;
           const password = document.getElementById('login-password').value;
-          
+
           // Simple validation
           if (!email || !password) {
             document.querySelector('.login-error').style.display = 'block';
             return;
           }
-          
-          // In a real implementation, you would send this data to your server
-          // For demo purposes, we'll simulate a successful login
-          
+
           // Show loading state
           const submitBtn = loginForm.querySelector('button[type="submit"]');
+          const originalBtnText = submitBtn.innerHTML;
           submitBtn.disabled = true;
           submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Logging in...';
-          
-          setTimeout(function() {
-            // Store login state in localStorage
-            localStorage.setItem('tutionWebsiteLoggedIn', 'true');
-            localStorage.setItem('tutionWebsiteUser', email);
-            
-            // Redirect to dashboard
-            window.location.href = 'dashboard.html';
-          }, 1500);
+
+          try {
+            // Use our API bridge to handle login
+            const response = await window.ApiService.login(email, password);
+
+            if (response.success) {
+              // Store login state in localStorage
+              localStorage.setItem('tutionWebsiteLoggedIn', 'true');
+              localStorage.setItem('tutionWebsiteUser', email);
+
+              // Redirect to dashboard
+              window.location.href = 'dashboard.html';
+            } else {
+              // Show error message
+              document.querySelector('.login-error').style.display = 'block';
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnText;
+            }
+          } catch (error) {
+            console.error('Login error:', error);
+            document.querySelector('.login-error').textContent = error.message || 'Login failed. Please try again.';
+            document.querySelector('.login-error').style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+          }
         });
       }
-      
+
+      // Enhanced form validation
+      const nameField = document.getElementById('register-name');
+      const emailField = document.getElementById('register-email');
+      const phoneField = document.getElementById('register-phone');
+      const passwordField = document.getElementById('register-password');
+      const confirmPasswordField = document.getElementById('register-confirm-password');
+      const passwordMatchError = document.getElementById('password-match-error');
+
+      // Create validation error elements
+      function createErrorElement(message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'validation-error';
+        errorDiv.textContent = message;
+        errorDiv.style.color = 'var(--error-color)';
+        errorDiv.style.fontSize = '0.85rem';
+        errorDiv.style.marginTop = '0.25rem';
+        errorDiv.style.display = 'none';
+        return errorDiv;
+      }
+
+      // Add error elements to form fields
+      if (nameField && !nameField.nextElementSibling?.classList.contains('validation-error')) {
+        const nameError = createErrorElement('Please enter your full name');
+        nameField.parentNode.insertBefore(nameError, nameField.nextSibling);
+      }
+
+      if (emailField && !emailField.nextElementSibling?.classList.contains('validation-error')) {
+        const emailError = createErrorElement('Please enter a valid email address');
+        emailField.parentNode.insertBefore(emailError, emailField.nextSibling);
+      }
+
+      if (phoneField && !phoneField.nextElementSibling?.classList.contains('validation-error')) {
+        const phoneError = createErrorElement('Please enter a valid phone number');
+        phoneField.parentNode.insertBefore(phoneError, phoneField.nextSibling);
+      }
+
+      if (passwordField && !passwordField.nextElementSibling?.classList.contains('validation-error') &&
+          !passwordField.nextElementSibling?.classList.contains('password-hint')) {
+        const passwordError = createErrorElement('Password must be at least 8 characters with numbers and special characters');
+        passwordField.parentNode.insertBefore(passwordError, passwordField.nextElementSibling);
+      }
+
+      // Validation functions
+      function validateName(name) {
+        return name.trim().length >= 2 && /^[a-zA-Z\s'-]+$/.test(name);
+      }
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function validatePhone(phone) {
+        return /^[\d\s\+\-\(\)]{8,15}$/.test(phone);
+      }
+
+      function validatePassword(password) {
+        // At least 8 characters, 1 number, 1 uppercase, 1 lowercase, 1 special character
+        return password.length >= 8 &&
+               /\d/.test(password) &&
+               /[A-Z]/.test(password) &&
+               /[a-z]/.test(password) &&
+               /[^A-Za-z0-9]/.test(password);
+      }
+
+      // Real-time validation
+      if (nameField) {
+        nameField.addEventListener('input', function() {
+          const errorElement = nameField.nextElementSibling;
+          if (!validateName(this.value) && this.value.trim() !== '') {
+            this.classList.add('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'block';
+            }
+          } else {
+            this.classList.remove('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'none';
+            }
+          }
+        });
+
+        nameField.addEventListener('blur', function() {
+          const errorElement = nameField.nextElementSibling;
+          if (!validateName(this.value) && this.value.trim() !== '') {
+            this.classList.add('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'block';
+            }
+          }
+        });
+      }
+
+      if (emailField) {
+        emailField.addEventListener('input', function() {
+          const errorElement = emailField.nextElementSibling;
+          if (!validateEmail(this.value) && this.value.trim() !== '') {
+            this.classList.add('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'block';
+            }
+          } else {
+            this.classList.remove('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'none';
+            }
+          }
+        });
+
+        emailField.addEventListener('blur', function() {
+          const errorElement = emailField.nextElementSibling;
+          if (!validateEmail(this.value) && this.value.trim() !== '') {
+            this.classList.add('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'block';
+            }
+          }
+        });
+      }
+
+      if (phoneField) {
+        phoneField.addEventListener('input', function() {
+          const errorElement = phoneField.nextElementSibling;
+          if (!validatePhone(this.value) && this.value.trim() !== '') {
+            this.classList.add('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'block';
+            }
+          } else {
+            this.classList.remove('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'none';
+            }
+          }
+        });
+
+        phoneField.addEventListener('blur', function() {
+          const errorElement = phoneField.nextElementSibling;
+          if (!validatePhone(this.value) && this.value.trim() !== '') {
+            this.classList.add('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'block';
+            }
+          }
+        });
+      }
+
+      if (passwordField) {
+        passwordField.addEventListener('input', function() {
+          const errorElement = passwordField.nextElementSibling;
+          if (!validatePassword(this.value) && this.value.trim() !== '') {
+            this.classList.add('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'block';
+            }
+          } else {
+            this.classList.remove('is-invalid');
+            if (errorElement.classList.contains('validation-error')) {
+              errorElement.style.display = 'none';
+            }
+          }
+          // Also check password match if confirm password has a value
+          if (confirmPasswordField.value.trim() !== '') {
+            checkPasswordsMatch();
+          }
+        });
+      }
+
+      // Password matching validation
+      if (passwordField && confirmPasswordField) {
+        // Function to check if passwords match
+        function checkPasswordsMatch() {
+          const password = passwordField.value;
+          const confirmPassword = confirmPasswordField.value;
+
+          if (confirmPassword.length > 0) {
+            if (password !== confirmPassword) {
+              confirmPasswordField.classList.add('is-invalid');
+              passwordMatchError.style.display = 'block';
+              return false;
+            } else {
+              confirmPasswordField.classList.remove('is-invalid');
+              passwordMatchError.style.display = 'none';
+              return true;
+            }
+          }
+          return true;
+        }
+
+        // Add event listeners for real-time validation
+        confirmPasswordField.addEventListener('input', checkPasswordsMatch);
+        confirmPasswordField.addEventListener('blur', checkPasswordsMatch);
+      }
+
       // Register form submission
       const registerForm = document.querySelector('.register-form');
       if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
+        registerForm.addEventListener('submit', async function(e) {
           e.preventDefault();
-          
+
           const name = document.getElementById('register-name').value;
           const email = document.getElementById('register-email').value;
           const phone = document.getElementById('register-phone').value;
           const password = document.getElementById('register-password').value;
           const confirmPassword = document.getElementById('register-confirm-password').value;
-          
-          // Simple validation
-          if (!name || !email || !phone || !password || !confirmPassword) {
-            alert('Please fill in all fields');
+
+          // Comprehensive validation
+          let isValid = true;
+
+          // Validate name
+          if (!name || !validateName(name)) {
+            nameField.classList.add('is-invalid');
+            nameField.nextElementSibling.style.display = 'block';
+            isValid = false;
+          }
+
+          // Validate email
+          if (!email || !validateEmail(email)) {
+            emailField.classList.add('is-invalid');
+            emailField.nextElementSibling.style.display = 'block';
+            isValid = false;
+          }
+
+          // Validate phone
+          if (!phone || !validatePhone(phone)) {
+            phoneField.classList.add('is-invalid');
+            phoneField.nextElementSibling.style.display = 'block';
+            isValid = false;
+          }
+
+          // Validate password
+          if (!password || !validatePassword(password)) {
+            passwordField.classList.add('is-invalid');
+            passwordField.nextElementSibling.style.display = 'block';
+            isValid = false;
+          }
+
+          // Check if passwords match
+          if (!checkPasswordsMatch()) {
+            isValid = false;
+          }
+
+          // Check terms agreement
+          const termsCheckbox = document.querySelector('input[name="terms"]');
+          if (!termsCheckbox.checked) {
+            // Create or show terms error
+            let termsError = termsCheckbox.closest('.form-group').querySelector('.validation-error');
+            if (!termsError) {
+              termsError = createErrorElement('You must agree to the Terms of Service and Privacy Policy');
+              termsCheckbox.closest('.form-group').appendChild(termsError);
+            }
+            termsError.style.display = 'block';
+            isValid = false;
+          }
+
+          // If validation fails, scroll to the first error
+          if (!isValid) {
+            const firstError = document.querySelector('.is-invalid, .validation-error[style*="block"]');
+            if (firstError) {
+              firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
             return;
           }
-          
-          if (password !== confirmPassword) {
-            alert('Passwords do not match');
-            return;
-          }
-          
-          // In a real implementation, you would send this data to your server
-          // For demo purposes, we'll simulate a successful registration
-          
+
           // Show loading state
           const submitBtn = registerForm.querySelector('button[type="submit"]');
+          const originalBtnText = submitBtn.innerHTML;
           submitBtn.disabled = true;
           submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Registering...';
-          
-          setTimeout(function() {
-            // Store login state in localStorage
-            localStorage.setItem('tutionWebsiteLoggedIn', 'true');
-            localStorage.setItem('tutionWebsiteUser', email);
-            
-            // Redirect to dashboard
-            window.location.href = 'dashboard.html';
-          }, 1500);
+
+          try {
+            // Prepare user data
+            const userData = {
+              name,
+              email,
+              phone,
+              password
+            };
+
+            // Use our API bridge to handle registration
+            const response = await window.ApiService.register(userData);
+
+            if (response.success) {
+              // Store login state in localStorage
+              localStorage.setItem('tutionWebsiteLoggedIn', 'true');
+              localStorage.setItem('tutionWebsiteUser', email);
+
+              // Redirect to dashboard
+              window.location.href = 'dashboard.html';
+            } else {
+              // Show error message
+              alert('Registration failed. Please try again.');
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnText;
+            }
+          } catch (error) {
+            console.error('Registration error:', error);
+            alert(error.message || 'Registration failed. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+          }
         });
       }
-      
+
       // Toggle between login and register forms for mobile view
-      const showLoginLink = document.querySelector('.show-login');
-      if (showLoginLink) {
-        showLoginLink.addEventListener('click', function(e) {
-          e.preventDefault();
-          document.querySelector('.login-container').style.display = 'block';
-          document.querySelector('.register-container').style.display = 'none';
+      function setupLoginLink() {
+        const showLoginLink = document.querySelector('.show-login');
+        if (showLoginLink) {
+          showLoginLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Login link clicked');
+
+            // Check if we're on mobile view
+            if (window.innerWidth <= 768) {
+              const loginContainer = document.querySelector('.login-container');
+              const registerContainer = document.querySelector('.register-container');
+
+              if (registerContainer) {
+                registerContainer.classList.remove('active');
+                registerContainer.style.display = 'none';
+                console.log('Register container hidden');
+              }
+
+              if (loginContainer) {
+                loginContainer.classList.remove('hidden');
+                loginContainer.style.display = 'block';
+                loginContainer.style.opacity = '1';
+                console.log('Login container displayed');
+
+                // Scroll to top of login container
+                loginContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            } else {
+              // Just scroll to login form on desktop
+              const loginContainer = document.querySelector('.login-container');
+              if (loginContainer) {
+                loginContainer.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          });
+        }
+      }
+
+      // Setup login link
+      setupLoginLink();
+
+      // Add a "Register" link to the login form for mobile view
+      function addRegisterLink() {
+        const loginContainer = document.querySelector('.login-container');
+        if (!loginContainer) return; // Safety check
+
+        // Remove any existing register links first to avoid duplicates
+        const existingRegisterLink = loginContainer.querySelector('.mobile-register-link');
+        if (existingRegisterLink) {
+          existingRegisterLink.remove();
+        }
+
+        // Create the register link with prominent styling
+        const registerLink = document.createElement('div');
+        registerLink.className = 'login-link mobile-register-link';
+        registerLink.innerHTML = '<p><strong>Don\'t have an account?</strong> <a href="#" class="show-register">Register here</a></p>';
+
+        // Make sure it's appended to the login container
+        loginContainer.appendChild(registerLink);
+        console.log('Register link added to login container');
+
+        // Add event listener to the new register link
+        const showRegisterLink = registerLink.querySelector('.show-register');
+        if (showRegisterLink) {
+          showRegisterLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Register link clicked');
+
+            // Check if we're on mobile view
+            if (window.innerWidth <= 768) {
+              const loginContainer = document.querySelector('.login-container');
+              const registerContainer = document.querySelector('.register-container');
+
+              if (loginContainer) {
+                loginContainer.classList.add('hidden');
+                loginContainer.style.display = 'none';
+                console.log('Login container hidden');
+              }
+
+              if (registerContainer) {
+                // Make sure the register container is visible
+                registerContainer.style.display = 'block';
+                registerContainer.style.opacity = '1';
+                registerContainer.classList.add('active');
+                console.log('Register container displayed');
+
+                // Scroll to top of register container
+                registerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            } else {
+              // Just scroll to register form on desktop
+              const registerContainer = document.querySelector('.register-container');
+              if (registerContainer) {
+                registerContainer.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          });
+        }
+      }
+
+      // Add the register link if we're on mobile
+      const loginContainer = document.querySelector('.login-container');
+      if (loginContainer) {
+        addRegisterLink();
+      }
+
+      // Handle window resize to adjust form visibility
+      window.addEventListener('resize', function() {
+        const loginContainer = document.querySelector('.login-container');
+        const registerContainer = document.querySelector('.register-container');
+
+        if (!loginContainer || !registerContainer) return;
+
+        if (window.innerWidth > 768) {
+          // On desktop, show both forms
+          loginContainer.classList.remove('hidden');
+          loginContainer.style.display = 'block';
+          registerContainer.style.display = 'block';
+          registerContainer.classList.remove('active');
+        } else {
+          // On mobile, show only one form
+          if (registerContainer.classList.contains('active')) {
+            loginContainer.classList.add('hidden');
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'block';
+          } else {
+            loginContainer.classList.remove('hidden');
+            loginContainer.style.display = 'block';
+            registerContainer.style.display = 'none';
+          }
+
+          // Make sure we have the register link on mobile
+          addRegisterLink();
+
+          // Re-setup the login link
+          setupLoginLink();
+        }
+      });
+
+      // Initial check for mobile view
+      if (window.innerWidth <= 768) {
+        const loginContainer = document.querySelector('.login-container');
+        const registerContainer = document.querySelector('.register-container');
+
+        // Force a clean state on page load for mobile
+        if (registerContainer) {
+          // Initialize the register container but keep it hidden
+          registerContainer.style.display = 'none';
+          registerContainer.classList.remove('active');
+          // Don't set opacity to 0 as it might interfere with transitions
+        }
+
+        if (loginContainer) {
+          loginContainer.style.display = 'block';
+          loginContainer.classList.remove('hidden');
+          loginContainer.style.opacity = '1';
+        }
+
+        // Make sure the register link is visible on mobile
+        addRegisterLink();
+
+        // Setup the login link
+        setupLoginLink();
+
+        // Add a click handler to the auth container to ensure only one form is visible
+        const authContainer = document.querySelector('.auth-container');
+        if (authContainer) {
+          // Re-setup links
+          addRegisterLink();
+          setupLoginLink();
+        }
+      }
+
+      // Local Storage for Form Data
+      function saveFormData() {
+        // Only save if user has opted in
+        const rememberMe = document.querySelector('input[name="remember"]');
+        if (!rememberMe || !rememberMe.checked) {
+          // If user unchecked "remember me", clear any saved data
+          localStorage.removeItem('eduSingaporeLoginData');
+          return;
+        }
+
+        // Save login form data
+        const loginEmail = document.getElementById('login-email');
+        if (loginEmail) {
+          const loginData = {
+            email: loginEmail.value,
+            timestamp: new Date().getTime()
+          };
+          localStorage.setItem('eduSingaporeLoginData', JSON.stringify(loginData));
+        }
+      }
+
+      function loadFormData() {
+        // Check for saved login data
+        const savedLoginData = localStorage.getItem('eduSingaporeLoginData');
+        if (savedLoginData) {
+          try {
+            const loginData = JSON.parse(savedLoginData);
+
+            // Only use data if it's less than 30 days old
+            const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+            const now = new Date().getTime();
+
+            if (loginData.timestamp && (now - loginData.timestamp) < thirtyDaysInMs) {
+              // Fill in the login form
+              const loginEmail = document.getElementById('login-email');
+              const rememberMe = document.querySelector('input[name="remember"]');
+
+              if (loginEmail) loginEmail.value = loginData.email || '';
+              if (rememberMe) rememberMe.checked = true;
+            } else {
+              // Data is too old, remove it
+              localStorage.removeItem('eduSingaporeLoginData');
+            }
+          } catch (e) {
+            console.error('Error loading saved form data:', e);
+            localStorage.removeItem('eduSingaporeLoginData');
+          }
+        }
+      }
+
+      // Add event listeners for form data persistence
+      // Use the existing loginForm variable from above
+      if (loginForm) {
+        loginForm.addEventListener('submit', saveFormData);
+
+        // Load saved data when page loads
+        loadFormData();
+      }
+
+      // Add animation classes to elements
+      function addAnimations() {
+        // Add fade-in animation to login/register containers
+        const loginContainer = document.querySelector('.login-container');
+        const registerContainer = document.querySelector('.register-container');
+
+        if (loginContainer) {
+          loginContainer.classList.add('animate-fade-in');
+        }
+
+        if (registerContainer) {
+          registerContainer.classList.add('animate-fade-in');
+        }
+
+        // Add staggered animations to form groups
+        const formGroups = document.querySelectorAll('.form-group');
+        formGroups.forEach((group, index) => {
+          group.classList.add('animate-slide-up');
+          group.style.animationDelay = `${0.1 + (index * 0.05)}s`;
+        });
+
+        // Add pulse animation to submit buttons
+        const submitButtons = document.querySelectorAll('button[type="submit"]');
+        submitButtons.forEach(button => {
+          button.addEventListener('mouseover', function() {
+            this.classList.add('animate-pulse');
+          });
+
+          button.addEventListener('mouseout', function() {
+            this.classList.remove('animate-pulse');
+          });
         });
       }
-      
-      const showRegisterLink = document.querySelector('.show-register');
-      if (showRegisterLink) {
-        showRegisterLink.addEventListener('click', function(e) {
+
+      // Add animations when DOM is loaded
+      addAnimations();
+
+      // Policy Popup Functionality
+      const termsLink = document.querySelector('.open-terms');
+      const privacyLink = document.querySelector('.open-privacy');
+      const termsOverlay = document.getElementById('terms-overlay');
+      const privacyOverlay = document.getElementById('privacy-overlay');
+      const closeTerms = document.getElementById('close-terms');
+      const closePrivacy = document.getElementById('close-privacy');
+
+      // Open Terms of Service popup
+      if (termsLink) {
+        termsLink.addEventListener('click', function(e) {
           e.preventDefault();
-          document.querySelector('.register-container').style.display = 'block';
-          document.querySelector('.login-container').style.display = 'none';
+          termsOverlay.style.display = 'flex';
+          document.body.style.overflow = 'hidden'; // Prevent scrolling behind overlay
         });
       }
+
+      // Open Privacy Policy popup
+      if (privacyLink) {
+        privacyLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          privacyOverlay.style.display = 'flex';
+          document.body.style.overflow = 'hidden'; // Prevent scrolling behind overlay
+        });
+      }
+
+      // Close Terms of Service popup
+      if (closeTerms) {
+        closeTerms.addEventListener('click', function() {
+          termsOverlay.style.display = 'none';
+          document.body.style.overflow = ''; // Restore scrolling
+        });
+      }
+
+      // Close Privacy Policy popup
+      if (closePrivacy) {
+        closePrivacy.addEventListener('click', function() {
+          privacyOverlay.style.display = 'none';
+          document.body.style.overflow = ''; // Restore scrolling
+        });
+      }
+
+      // Close popups when clicking outside content
+      window.addEventListener('click', function(e) {
+        if (e.target === termsOverlay) {
+          termsOverlay.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+        if (e.target === privacyOverlay) {
+          privacyOverlay.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close popups with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          termsOverlay.style.display = 'none';
+          privacyOverlay.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
     });
   </script>
 </body>
-</html> 
+</html>
